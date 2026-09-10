@@ -1,0 +1,16 @@
+# Configurația site-ului public cu documentele legale ale WHOUP.
+#
+# `theme` este singura linie care contează: fără ea, GitHub Pages livrează
+# markdown-ul ca text brut, fără niciun stil — iar o politică de
+# confidențialitate care arată a fișier uitat pe server nu inspiră încredere
+# exact în ecranul în care omul se hotărăște dacă îți dă poziția lui.
+
+title: WHOUP
+description: Documentele legale ale aplicației WHOUP
+lang: ro
+
+theme: jekyll-theme-minimal
+
+# Fișierele astea nu se publică: sunt pentru noi.
+exclude:
+  - README.md
