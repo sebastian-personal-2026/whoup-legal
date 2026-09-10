@@ -12,8 +12,8 @@ acum — și unde să te duci, chiar dacă ești singurul om de pe hartă.
 
 ## Documente
 
-- [Politica de confidențialitate](./confidentialitate)
-- [Termeni și condiții](./termeni)
+- [Politica de confidențialitate]({{ '/confidentialitate' | relative_url }})
+- [Termeni și condiții]({{ '/termeni' | relative_url }})
 
 ## Contact
 

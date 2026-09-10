@@ -20,7 +20,7 @@ Adresa publică a acestui document:
 et. 7, ap. 69, camera 1, Sector 5, București, România.
 
 Prin crearea unui cont accepți acești termeni și
-[politica de confidențialitate](./confidentialitate). Dacă nu ești de acord
+[politica de confidențialitate]({{ '/confidentialitate' | relative_url }}). Dacă nu ești de acord
 cu ei, nu folosi aplicația.
 
 ## 2. Cine poate folosi aplicația
