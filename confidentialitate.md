@@ -5,7 +5,7 @@ permalink: /confidentialitate
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/confidentialitate.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 3 septembrie 2026**
+**Ultima actualizare: 5 octombrie 2026**
 
 Adresa publică a acestui document:
 <https://sebastian-personal-2026.github.io/whoup-legal/confidentialitate>
@@ -93,6 +93,11 @@ o scrii („la Ceaun, pe la 19:30") și dacă ai bifat „sunt deja acolo".
 
 Cât timp disponibilitatea este activă, aceste date sunt **vizibile celorlalți
 utilizatori din apropiere**. Ele expiră singure, la termenul ales de tine.
+
+Separat, păstrăm un **istoric fără nume**: pentru ce intenții s-a pornit o
+disponibilitate, când a pornit și când s-a oprit. Nu conține contul tău, nota,
+poziția sau altceva despre tine, deci nu se poate lega de tine. Îl folosim doar
+ca să numărăm câți oameni sunt pe hartă seara.
 
 **Temei:** executarea contractului.
 
@@ -233,6 +238,7 @@ aprobate de Comisia Europeană.
 | Contul și profilul | Cât timp ai cont |
 | Poziția ta | Doar cât ai o disponibilitate activă. Se șterge automat când o oprești |
 | Disponibilitățile | Expiră la termenul ales și nu mai apar nicăieri; rândul se șterge odată cu contul |
+| Istoricul fără nume al disponibilităților | Nu conține nimic despre tine, deci nu se leagă de cont |
 | Mesajele și conversațiile | Cât timp există contul |
 | Postările | Expiră la termenul ales; se șterg odată cu contul |
 | Blocările | Cât timp ai cont, sau până le anulezi tu |
@@ -274,7 +280,8 @@ fi anulată.
 Se șterg: contul, profilul, data nașterii, poza de profil, disponibilitățile,
 postările, mesajele tale, blocările și tokenurile de notificare.
 
-Rămân, fără legătura cu tine: raportările pe care le-ai trimis despre alți
+Rămân, fără legătura cu tine: istoricul fără nume al disponibilităților
+(secțiunea 2.4), raportările pe care le-ai trimis despre alți
 utilizatori (ca informația despre cel raportat să nu dispară) și mesajele pe
 care le-ai trimis, în conversațiile celorlalți — pentru același motiv pentru
 care mesajele nu se pot șterge.
