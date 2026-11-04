@@ -8,14 +8,14 @@ permalink: /
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WHOUP — unde ieși acum, aproape de tine</title>
-<meta name="description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor: terase, deschis până târziu, bun pentru laptop, cu câinele. Și, pe măsură ce se adună lumea, cine iese din casă acum.">
+<meta name="description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor și oamenii care ies din casă acum, pentru o bere, o cafea, o masă, sport sau o plimbare cu câinele, la câteva minute de tine.">
 <meta name="theme-color" content="#F6F8FC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0A1220" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WHOUP">
 <meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="WHOUP — unde ieși acum, aproape de tine">
-<meta property="og:description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor. Who's around. What's up.">
+<meta property="og:description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor și cine iese din casă acum, aproape de tine. Who's around. What's up.">
 <meta property="og:url" content="https://whoup.ro/">
 <meta property="og:image" content="https://whoup.ro/og.jpg">
 <meta property="og:image:width" content="1024">
@@ -29,8 +29,20 @@ permalink: /
   aplicație care promite că păstrează poziția oamenilor pentru ea n-are ce
   căuta cu trei servicii terțe pe prima ei pagină.
 
-  Textele vin din docs/magazin.md și urmează aceleași reguli: lansăm harta
-  de localuri, nu promitem oameni, nimic ce nu se poate verifica.
+  Textele urmează regulile din docs/magazin.md: nimic ce nu se poate
+  verifica, niciun număr de utilizatori, iar despre oameni „pe măsură ce se
+  adună lumea", nu „în curând” — partea cu oamenii funcționează deja, lipsesc
+  doar oamenii, iar „în curând” ar spune „revino mai târziu”.
+
+  Pătratele din perete sunt deocamdată iconițele aplicației pe culorile ei
+  (4 noiembrie). Când vin pozele (originale în assets/site/, făcute pătrate de
+  640 px cu `npm run site:photos`), se schimbă două lucruri aici, nu doar
+  fișierele: textul `alt` al fiecărei poze (din tabelul din
+  assets/site/README.md) și rândul din subsol care spune că pozele sunt
+  create cu AI. Cât sunt iconițe, `alt` rămâne gol: eticheta de sub pătrat
+  spune deja ce e, iar o descriere de fotografie peste o iconiță ar minți. Ordinea pătrățelelor din perete nu e întâmplătoare:
+  cu `grid-auto-flow: dense`, ea umple exact 6×4 pe ecran lat și 4×6 pe
+  telefon, fără goluri. Un pătrat adăugat sau mutat se renumără.
 -->
 <style>
   :root {
@@ -44,7 +56,9 @@ permalink: /
     --blue: #2878FF;
     --violet: #6C35F5;
     --pink: #F52B9A;
+    --coral: #FF5364;
     --orange: #FFA126;
+    --midnight: #07172F;
     --gradient: linear-gradient(90deg, #2878FF, #7135F5, #F52B9A, #FF5364, #FFA126);
     color-scheme: light dark;
   }
@@ -71,16 +85,17 @@ permalink: /
   .bar { height: 4px; background: var(--gradient); }
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
 
-  header.hero { text-align: center; padding: 48px 0 32px; }
-  .logo { display: block; width: 200px; max-width: 60%; height: auto; margin: 0 auto 32px; }
+  /* ---------- Început ---------- */
+  header.hero { text-align: center; padding: 44px 0 28px; }
+  .logo { display: block; width: 190px; max-width: 56%; height: auto; margin: 0 auto 28px; }
   h1 {
-    font-size: clamp(30px, 6vw, 46px);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-size: clamp(32px, 6.4vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
     margin: 0 auto 16px;
-    max-width: 16ch;
+    max-width: 15ch;
   }
-  .lead { font-size: 19px; color: var(--muted); max-width: 40em; margin: 0 auto 28px; }
+  .lead { font-size: 19px; color: var(--muted); max-width: 38em; margin: 0 auto 26px; }
   .store {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 12px 20px; border-radius: 999px;
@@ -88,9 +103,96 @@ permalink: /
     font-weight: 600; font-size: 16px;
   }
   .store svg { width: 20px; height: 20px; flex: none; }
-  .where { font-size: 15px; color: var(--muted); margin: 16px 0 0; }
+  .where { font-size: 15px; color: var(--muted); margin: 14px 0 0; }
 
-  .grid { display: grid; gap: 16px; padding: 24px 0 8px; }
+  /* ---------- Peretele de pătrățele ---------- */
+  .wall {
+    max-width: 1180px; margin: 8px auto 0; padding: 0 16px;
+    display: grid; gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+  }
+  @media (min-width: 760px) { .wall { grid-template-columns: repeat(6, 1fr); gap: 10px; } }
+  .tile {
+    position: relative; margin: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px; overflow: hidden;
+    background: var(--c, var(--midnight));
+  }
+  .tile.big { grid-column: span 2; grid-row: span 2; border-radius: 20px; }
+  .tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .tile figcaption {
+    position: absolute; left: 6px; bottom: 6px; max-width: calc(100% - 12px);
+    padding: 3px 9px; border-radius: 10px;
+    background: rgba(7, 23, 47, 0.78); color: #fff;
+    font-size: 12px; font-weight: 600; line-height: 1.35;
+  }
+  .tile.big figcaption { left: 10px; bottom: 10px; font-size: 15px; padding: 5px 12px; }
+  @media (min-width: 760px) { .tile figcaption { font-size: 13px; left: 8px; bottom: 8px; } }
+  /* Pe telefon, un pătrat mic are ~80 px: „Deschis până târziu" ar ocupa trei
+     rânduri peste poză. Se vede numele scurt, iar cititorul de ecran îl
+     primește tot pe cel întreg. */
+  .tile .short { display: none; }
+  @media (max-width: 759px) {
+    .tile:not(.big) .full {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+    .tile:not(.big) .short { display: inline; }
+  }
+  .word {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 6px; color: #fff;
+    font-weight: 800; letter-spacing: 0.04em; line-height: 1.1;
+    font-size: clamp(12px, 2.6vw, 21px);
+  }
+  .word.orange { color: var(--midnight); }
+  .word.phrase { letter-spacing: -0.01em; font-size: clamp(13px, 2.8vw, 22px); }
+  .word.grad { background: linear-gradient(135deg, #2878FF, #7135F5 35%, #F52B9A 65%, #FFA126); }
+
+  /* ---------- Secțiuni ---------- */
+  section.block { padding: 56px 0 8px; }
+  .kicker {
+    margin: 0 0 8px; font-size: 13px; font-weight: 800; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  h2.title {
+    font-size: clamp(26px, 4.4vw, 36px); line-height: 1.15; letter-spacing: -0.02em;
+    margin: 0 0 14px; max-width: 22ch;
+  }
+  .intro { color: var(--muted); max-width: 40em; margin: 0 0 12px; }
+  .intro strong { color: var(--text); }
+
+  .steps { display: grid; gap: 14px; margin: 26px 0 0; padding: 0; list-style: none; counter-reset: step; }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps > li {
+    counter-increment: step;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 22px;
+  }
+  .steps > li::before {
+    content: counter(step);
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 999px; margin-bottom: 12px;
+    background: var(--gradient); color: #fff; font-weight: 800;
+  }
+  .steps h3 { font-size: 19px; line-height: 1.3; margin: 0 0 6px; }
+  .steps p { margin: 0; color: var(--muted); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .chips li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 15px; }
+
+  .moments { display: grid; gap: 14px; margin: 24px 0 0; }
+  @media (min-width: 760px) { .moments { grid-template-columns: repeat(3, 1fr); } }
+  .moment {
+    border-radius: 20px; padding: 22px; color: #fff;
+    background: var(--c);
+  }
+  .moment .when { margin: 0 0 6px; font-size: 14px; font-weight: 700; opacity: 0.9; }
+  .moment h3 { margin: 0 0 6px; font-size: 20px; line-height: 1.25; }
+  .moment p { margin: 0; }
+
+  .grid { display: grid; gap: 16px; padding: 24px 0 0; }
   @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
   .card {
     background: var(--surface);
@@ -104,13 +206,19 @@ permalink: /
     content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
     background: var(--accent);
   }
-  .card h2 { font-size: 21px; line-height: 1.3; margin: 0 0 8px; }
+  .card h3 { font-size: 21px; line-height: 1.3; margin: 0 0 8px; }
   .card p { margin: 0; color: var(--muted); }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
-  .chips li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 15px; }
+
+  .next { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  @media (min-width: 760px) { .next { grid-template-columns: 1fr 1fr; } }
+  .next li {
+    border: 1px dashed var(--border); border-radius: 18px; padding: 18px 20px;
+    color: var(--muted);
+  }
+  .next strong { display: block; color: var(--text); font-size: 18px; margin-bottom: 4px; }
 
   .words {
-    text-align: center; padding: 40px 0 8px;
+    text-align: center; padding: 56px 0 8px; margin: 0;
     font-weight: 700; letter-spacing: 0.18em; font-size: 14px; color: var(--muted);
   }
   .tagline { text-align: center; font-size: 22px; font-weight: 700; margin: 4px 0 48px; }
@@ -137,63 +245,154 @@ permalink: /
     </picture>
     <h1>Unde ieși acum, aproape de tine.</h1>
     <p class="lead">
-      WHOUP e harta localurilor reale din Floreasca, Dorobanți și Aviatorilor:
-      unde stai pe terasă, ce e deschis până târziu, unde lucrezi la laptop și
-      unde poți veni cu câinele. Iar pe măsură ce se adună lumea, și cine iese
-      din casă acum, în apropierea ta.
+      Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor. Când ieși
+      din casă, te pui și tu pe ea și vezi cine mai iese acum, aproape: pentru
+      o bere, o cafea, o masă, sport sau o plimbare cu câinele.
     </p>
     <span class="store">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
       În curând pe Google Play
     </span>
-    <p class="where">Deocamdată, localurile de pe hartă sunt doar în București, în jurul zonei Floreasca – Dorobanți – Aviatorilor.</p>
+    <p class="where">Pornim pe Android, în București, în jurul zonei Floreasca – Dorobanți – Aviatorilor.</p>
   </header>
+</div>
 
+<div class="wall" role="group" aria-label="Pentru ce poți ieși cu WHOUP">
+  <figure class="tile big" style="--c:#B45309"><img src="{{ '/foto/bere.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O bere</figcaption></figure>
+  <figure class="tile" style="--c:#78350F"><img src="{{ '/foto/cafea.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O cafea</figcaption></figure>
+  <div class="tile word" style="--c:#2878FF">PEOPLE</div>
+  <figure class="tile" style="--c:#1D4ED8"><img src="{{ '/foto/business.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>Business</figcaption></figure>
+  <figure class="tile" style="--c:#DC2626"><img src="{{ '/foto/masa.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O masă</figcaption></figure>
+  <figure class="tile" style="--c:#D97706"><img src="{{ '/foto/terasa.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Terasă</figcaption></figure>
+  <figure class="tile" style="--c:#334155"><img src="{{ '/foto/laptop.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Bun pentru laptop</span><span class="short" aria-hidden="true">Laptop</span></figcaption></figure>
+  <div class="tile word" style="--c:#6C35F5">PLACES</div>
+  <figure class="tile" style="--c:#047857"><img src="{{ '/foto/sport.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Sport</figcaption></figure>
+  <figure class="tile" style="--c:#0E7490"><img src="{{ '/foto/caine.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Plimbat câinele</span><span class="short" aria-hidden="true">Câine</span></figcaption></figure>
+  <div class="tile word" style="--c:#F52B9A">PLANS</div>
+  <figure class="tile big" style="--c:#BE185D"><img src="{{ '/foto/dating.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Dating</figcaption></figure>
+  <figure class="tile" style="--c:#7C3AED"><img src="{{ '/foto/copii.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Ieșit cu copiii</span><span class="short" aria-hidden="true">Copii</span></figcaption></figure>
+  <figure class="tile" style="--c:#4C1D95"><img src="{{ '/foto/tarziu.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Deschis până târziu</span><span class="short" aria-hidden="true">Târziu</span></figcaption></figure>
+  <figure class="tile" style="--c:#0F766E"><img src="{{ '/foto/animale.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Primește animale</span><span class="short" aria-hidden="true">Animale</span></figcaption></figure>
+  <div class="tile word orange" style="--c:#FFA126">NOW</div>
+  <div class="tile word phrase" style="--c:#07172F">Who’s around.</div>
+  <div class="tile word phrase grad">What’s up.</div>
+</div>
+
+<div class="wrap">
   <main>
-    <div class="grid">
-      <section class="card" style="--accent: var(--blue)">
-        <h2>Harta de localuri</h2>
-        <p>
-          Peste 300 de localuri din zonă, verificate de noi unul câte unul, din
-          surse recente, fiecare cu o notă scurtă despre ce găsești acolo.
-          Program, telefon și „Cum ajung”, direct din hartă. Se vede și fără cont.
-        </p>
-        <ul class="chips" aria-label="Filtre">
-          <li>Terasă</li>
-          <li>Bun pentru laptop</li>
-          <li>Deschis până târziu</li>
-          <li>Primește animale</li>
-        </ul>
-      </section>
+    <section class="block" aria-labelledby="cum">
+      <p class="kicker">Cum merge</p>
+      <h2 class="title" id="cum">Trei pași de la „n-am chef să stau acasă” la „ne vedem acolo”.</h2>
+      <ol class="steps">
+        <li>
+          <h3>Alegi pentru ce ai chef</h3>
+          <p>Harta îți arată unde să te duci pentru asta: localuri reale din zonă, cu o notă scurtă despre fiecare.</p>
+          <ul class="chips" aria-label="Intențiile din aplicație">
+            <li>O bere</li><li>O cafea</li><li>O masă</li><li>Business</li>
+            <li>Sport</li><li>Plimbat câinele</li><li>Ieșit cu copiii</li><li>Dating</li>
+          </ul>
+        </li>
+        <li>
+          <h3>Te pui pe hartă, cât vrei tu</h3>
+          <p>Pentru 1, 3 sau 6 ore, cu o notă („la terasă, pe la 19:30”) sau cu „sunt deja acolo”. Apoi disponibilitatea expiră singură.</p>
+        </li>
+        <li>
+          <h3>Vezi cine mai iese, aproape</h3>
+          <p>Cine e disponibil acum, pentru ce și cam la câte minute pe jos. Îi scrii, iar cu „Ne vedem aici” stabiliți locul.</p>
+        </li>
+      </ol>
+    </section>
 
-      <section class="card" style="--accent: var(--violet)">
-        <h2>Disponibil acum, nu pe veci</h2>
-        <p>
-          Alegi pentru ce ai chef — o bere, o cafea, o masă, business, sport,
-          plimbat câinele, ieșit cu copiii sau dating — și te pui pe hartă
-          pentru 1, 3 sau 6 ore. Disponibilitatea expiră singură, așa că harta
-          nu arată oameni care au plecat de mult.
-        </p>
-      </section>
+    <section class="block" aria-labelledby="oameni">
+      <p class="kicker">Oamenii din jurul tău</p>
+      <h2 class="title" id="oameni">Nu încă un profil. Un om, acum, la câteva minute de tine.</h2>
+      <p class="intro">
+        Alte aplicații îți dau o coadă de profiluri fără sfârșit. WHOUP îți arată
+        altceva: <strong>cine iese din casă acum, pentru ce, și cât de aproape e</strong>.
+        Intenție, apropiere și timp. Atât.
+      </p>
+      <p class="intro">
+        Partea asta funcționează de azi. Cu cât se adună mai mulți oameni în
+        Floreasca, Dorobanți și Aviatorilor, cu atât găsești mai repede pe cineva
+        pentru o bere, o alergare sau o plimbare cu câinele.
+      </p>
+      <div class="moments">
+        <article class="moment" style="--c:#9A3F07">
+          <p class="when">18:30, ieși de la birou</p>
+          <h3>O bere, nu încă o seară pe canapea.</h3>
+          <p>Te pui pe hartă pentru o bere și vezi cine mai are același chef, prin apropiere.</p>
+        </article>
+        <article class="moment" style="--c:#1D4ED8">
+          <p class="when">O oră liberă între două întâlniri</p>
+          <h3>O cafea cu cineva din zonă.</h3>
+          <p>Business în loc de încă o oră de mailuri: un om din cartier, la un local la câțiva pași.</p>
+        </article>
+        <article class="moment" style="--c:#0E6577">
+          <p class="when">Duminică dimineață, în parc</p>
+          <h3>Plimbarea câinelui, cu companie.</h3>
+          <p>Afli cine mai e pe acolo, cu câinele lui, și vă vedeți la aceeași alee.</p>
+        </article>
+      </div>
+    </section>
 
-      <section class="card" style="--accent: var(--pink)">
-        <h2>„Ne vedem în 30 de minute”</h2>
-        <p>
-          Mesaje scurte între doi oameni, răspunsuri rapide și „Ne vedem aici”:
-          trimiți un local sau un punct de pe hartă, pe care îl vede doar
-          persoana cu care vorbești. Blocare și raportare din prima zi.
-        </p>
-      </section>
+    <section class="block" aria-labelledby="deja">
+      <p class="kicker">Ce găsești deja în aplicație</p>
+      <h2 class="title" id="deja">Utilă din prima zi, chiar dacă ești singur în zonă.</h2>
+      <div class="grid">
+        <section class="card" style="--accent: var(--blue)">
+          <h3>Harta de localuri</h3>
+          <p>
+            Peste 300 de localuri din zonă, verificate de noi unul câte unul, din
+            surse recente, fiecare cu o notă scurtă despre ce găsești acolo.
+            Program, telefon și „Cum ajung”, direct din hartă. Se vede și fără cont.
+          </p>
+          <ul class="chips" aria-label="Filtre">
+            <li>Terasă</li>
+            <li>Bun pentru laptop</li>
+            <li>Deschis până târziu</li>
+            <li>Primește animale</li>
+          </ul>
+        </section>
 
-      <section class="card" style="--accent: var(--orange)">
-        <h2>Poziția ta rămâne a ta</h2>
-        <p>
-          Ceilalți nu văd niciodată poziția ta exactă, doar o zonă de
-          aproximativ 250 de metri. Apari pe hartă doar cât ești disponibil, iar
-          când oprești disponibilitatea, poziția ta se șterge de pe server.
-        </p>
-      </section>
-    </div>
+        <section class="card" style="--accent: var(--violet)">
+          <h3>Disponibil acum, nu pe veci</h3>
+          <p>
+            Te pui pe hartă pentru 1, 3 sau 6 ore, iar disponibilitatea expiră
+            singură. Harta nu arată oameni care au plecat de mult: dacă vezi pe
+            cineva, chiar iese acum.
+          </p>
+        </section>
+
+        <section class="card" style="--accent: var(--pink)">
+          <h3>„Ne vedem în 30 de minute”</h3>
+          <p>
+            Mesaje scurte între doi oameni, răspunsuri rapide și „Ne vedem aici”:
+            trimiți un local sau un punct de pe hartă, pe care îl vede doar
+            persoana cu care vorbești. Blocare și raportare din prima zi.
+          </p>
+        </section>
+
+        <section class="card" style="--accent: var(--orange)">
+          <h3>Poziția ta rămâne a ta</h3>
+          <p>
+            Ceilalți nu văd niciodată poziția ta exactă, doar o zonă de
+            aproximativ 250 de metri. Apari pe hartă doar cât ești disponibil, iar
+            când oprești disponibilitatea, poziția ta se șterge de pe server.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="urmeaza">
+      <p class="kicker">Ce pregătim</p>
+      <h2 class="title" id="urmeaza">Ce urmează în WHOUP.</h2>
+      <ul class="next">
+        <li><strong>Scurtături pe hartă</strong>„Lucru la laptop”, „Terase”, „Deschis până târziu”, „Cu câinele”: lista potrivită dintr-o singură atingere.</li>
+        <li><strong>Trimite un loc unui prieten</strong>Ai găsit terasa bună? O trimiți mai departe direct din cardul localului.</li>
+        <li><strong>Date la zi de la localuri</strong>Le scriem localurilor din zonă să ne confirme programul și ce oferă, ca nota din hartă să rămână adevărată.</li>
+        <li><strong>WHOUP pe iPhone</strong>Pornim pe Android; versiunea de iPhone vine după.</li>
+      </ul>
+    </section>
 
     <p class="words" aria-hidden="true">PEOPLE · PLACES · PLANS · NOW</p>
     <p class="tagline">Who’s around. What’s up.</p>
@@ -220,8 +419,8 @@ permalink: /
       </div>
     </div>
     <p class="small">
-      WHOUP este doar pentru persoane de cel puțin 18 ani. Site-ul acesta nu
-      folosește cookie-uri și nici instrumente de analiză a vizitatorilor.
+      WHOUP este doar pentru persoane de cel puțin 18 ani. Site-ul nu folosește
+      cookie-uri și nici instrumente de analiză a vizitatorilor.
     </p>
   </footer>
 </div>
