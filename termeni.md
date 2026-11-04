@@ -5,10 +5,10 @@ permalink: /termeni
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/termeni.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 3 septembrie 2026**
+**Ultima actualizare: 3 noiembrie 2026**
 
 Adresa publică a acestui document:
-<https://sebastian-personal-2026.github.io/whoup-legal/termeni>
+<https://whoup.ro/termeni>
 
 ---
 
@@ -132,8 +132,10 @@ prin lege, inclusiv cea pentru vătămare produsă din culpa noastră.
 
 ## 11. Închiderea contului
 
-Îți poți șterge contul oricând: `Profil → Cont → Șterge contul`. Este
-definitivă.
+Îți poți șterge contul oricând: `Profil → Cont și securitate → Zonă
+periculoasă → Șterge contul definitiv`. Este definitivă. Fără aplicație, o
+poți cere prin email — pașii sunt pe [pagina despre ștergerea
+contului]({{ '/stergere-cont' | relative_url }}).
 
 ## 12. Modificări ale termenilor
 

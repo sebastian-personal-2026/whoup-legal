@@ -5,10 +5,10 @@ permalink: /confidentialitate
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/confidentialitate.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 5 octombrie 2026**
+**Ultima actualizare: 3 noiembrie 2026**
 
 Adresa publică a acestui document:
-<https://sebastian-personal-2026.github.io/whoup-legal/confidentialitate>
+<https://whoup.ro/confidentialitate>
 
 ---
 
@@ -24,8 +24,9 @@ sensibil e lucrul ăsta, l-am construit cu trei reguli pe care le poți verifica
    care te afli. Doi oameni din aceeași celulă primesc exact aceleași
    coordonate.
 2. **Poziția se stochează doar cât timp ești disponibil.** Când oprești
-   disponibilitatea, rândul cu poziția ta se șterge din baza de date. Nu e o
-   setare pe care ai putea s-o uiți pornită.
+   disponibilitatea, rândul cu poziția ta se șterge din baza de date; când
+   expiră singură, se șterge în cel mult cinci minute, chiar dacă nu mai
+   deschizi aplicația. Nu e o setare pe care ai putea s-o uiți pornită.
 3. **Data nașterii nu părăsește serverul.** Stă într-un tabel separat. Afară
    iese doar vârsta în ani.
 
@@ -116,7 +117,9 @@ Ce se întâmplă exact cu ea:
   deduce poziția exactă făcând media mai multor măsurători). Distanța afișată
   se calculează din poziția deja rotunjită.
 - **Când oprești disponibilitatea, rândul cu poziția se șterge.** La fel dacă
-  oprești „Apari pe hartă" sau dacă te deconectezi.
+  oprești „Apari pe hartă" sau dacă te deconectezi. Dacă disponibilitatea
+  expiră singură, serverul șterge poziția în cel mult cinci minute — fără să
+  aștepte să deschizi din nou aplicația.
 
 Poziția ta exactă nu este arătată niciunui alt utilizator, în nicio situație.
 
@@ -236,10 +239,10 @@ aprobate de Comisia Europeană.
 | Ce | Cât |
 |---|---|
 | Contul și profilul | Cât timp ai cont |
-| Poziția ta | Doar cât ai o disponibilitate activă. Se șterge automat când o oprești |
+| Poziția ta | Doar cât ai o disponibilitate activă. Se șterge când o oprești, iar dacă expiră singură, în cel mult cinci minute |
 | Disponibilitățile | Expiră la termenul ales și nu mai apar nicăieri; rândul se șterge odată cu contul |
 | Istoricul fără nume al disponibilităților | Nu conține nimic despre tine, deci nu se leagă de cont |
-| Mesajele și conversațiile | Cât timp există contul |
+| Mesajele și conversațiile | Cât timp există contul tău și al celuilalt participant. Când unul dintre voi își șterge contul, conversația dintre voi se șterge cu totul |
 | Postările | Expiră la termenul ales; se șterg odată cu contul |
 | Blocările | Cât timp ai cont, sau până le anulezi tu |
 | Raportările | Se păstrează și după ștergerea contului celui care a raportat, fără legătura cu el |
@@ -274,17 +277,22 @@ B-dul G-ral. Gheorghe Magheru 28-30, București, www.dataprotection.ro.
 
 ## 6. Cum îți ștergi contul
 
-**Din aplicație:** `Profil → Cont → Șterge contul`. Este definitivă și nu poate
-fi anulată.
+**Din aplicație:** `Profil → Cont și securitate → Zonă periculoasă → Șterge
+contul definitiv`. Este definitivă și nu poate fi anulată.
+
+**Fără aplicație:** scrie-ne la `whoup.contact@gmail.com` de pe adresa cu care
+ți-ai făcut contul. Pașii sunt pe [pagina despre ștergerea
+contului]({{ '/stergere-cont' | relative_url }}).
 
 Se șterg: contul, profilul, data nașterii, poza de profil, disponibilitățile,
-postările, mesajele tale, blocările și tokenurile de notificare.
+poziția, postările, blocările, tokenurile de notificare și **conversațiile la
+care ai participat, întregi** — cu mesajele ambelor părți. O conversație
+dispare deci și din lista celeilalte persoane.
 
 Rămân, fără legătura cu tine: istoricul fără nume al disponibilităților
 (secțiunea 2.4), raportările pe care le-ai trimis despre alți
-utilizatori (ca informația despre cel raportat să nu dispară) și mesajele pe
-care le-ai trimis, în conversațiile celorlalți — pentru același motiv pentru
-care mesajele nu se pot șterge.
+utilizatori (ca informația despre cel raportat să nu dispară) și erorile
+tehnice trimise de telefonul tău, care se șterg oricum la cel mult 90 de zile.
 
 ---
 

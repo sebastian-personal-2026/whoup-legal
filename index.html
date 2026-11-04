@@ -1,0 +1,229 @@
+---
+layout: null
+permalink: /
+---
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHOUP — unde ieși acum, aproape de tine</title>
+<meta name="description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor: terase, deschis până târziu, bun pentru laptop, cu câinele. Și, pe măsură ce se adună lumea, cine iese din casă acum.">
+<meta name="theme-color" content="#F6F8FC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1220" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WHOUP">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="WHOUP — unde ieși acum, aproape de tine">
+<meta property="og:description" content="Harta localurilor reale din Floreasca, Dorobanți și Aviatorilor. Who's around. What's up.">
+<meta property="og:url" content="https://whoup.ro/">
+<meta property="og:image" content="https://whoup.ro/og.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="{{ '/favicon.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<!--
+  Pagina de prezentare a aplicației, scrisă de mână (nu generată ca
+  documentele). Fără fonturi externe, fără analiză, fără cookie-uri: o
+  aplicație care promite că păstrează poziția oamenilor pentru ea n-are ce
+  căuta cu trei servicii terțe pe prima ei pagină.
+
+  Textele vin din docs/magazin.md și urmează aceleași reguli: lansăm harta
+  de localuri, nu promitem oameni, nimic ce nu se poate verifica.
+-->
+<style>
+  :root {
+    --bg: #F6F8FC;
+    --surface: #FFFFFF;
+    --text: #07172F;
+    --muted: #4F5B6E;
+    --border: #E2E8F0;
+    --link: #1D56C4;
+    --chip: #EEF3FC;
+    --blue: #2878FF;
+    --violet: #6C35F5;
+    --pink: #F52B9A;
+    --orange: #FFA126;
+    --gradient: linear-gradient(90deg, #2878FF, #7135F5, #F52B9A, #FF5364, #FFA126);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0A1220;
+      --surface: #111B2E;
+      --text: #EEF2F8;
+      --muted: #A3AEC0;
+      --border: #1F2B42;
+      --link: #8DB4FF;
+      --chip: #182640;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  a { color: var(--link); }
+  .bar { height: 4px; background: var(--gradient); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero { text-align: center; padding: 48px 0 32px; }
+  .logo { display: block; width: 200px; max-width: 60%; height: auto; margin: 0 auto 32px; }
+  h1 {
+    font-size: clamp(30px, 6vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 auto 16px;
+    max-width: 16ch;
+  }
+  .lead { font-size: 19px; color: var(--muted); max-width: 40em; margin: 0 auto 28px; }
+  .store {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 999px;
+    background: var(--text); color: var(--bg);
+    font-weight: 600; font-size: 16px;
+  }
+  .store svg { width: 20px; height: 20px; flex: none; }
+  .where { font-size: 15px; color: var(--muted); margin: 16px 0 0; }
+
+  .grid { display: grid; gap: 16px; padding: 24px 0 8px; }
+  @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+    background: var(--accent);
+  }
+  .card h2 { font-size: 21px; line-height: 1.3; margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .chips li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 15px; }
+
+  .words {
+    text-align: center; padding: 40px 0 8px;
+    font-weight: 700; letter-spacing: 0.18em; font-size: 14px; color: var(--muted);
+  }
+  .tagline { text-align: center; font-size: 22px; font-weight: 700; margin: 4px 0 48px; }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0 48px; font-size: 15px; color: var(--muted); }
+  .cols { display: grid; gap: 24px; }
+  @media (min-width: 720px) { .cols { grid-template-columns: 1fr 1fr; } }
+  footer h2 { font-size: 15px; margin: 0 0 8px; color: var(--text); }
+  footer ul { margin: 0; padding: 0; list-style: none; }
+  footer li { margin: 0 0 6px; }
+  footer p { margin: 0 0 6px; }
+  .small { margin-top: 24px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="bar" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <picture>
+      <source srcset="{{ '/logo-dark.webp' | relative_url }}" media="(prefers-color-scheme: dark)">
+      <img class="logo" src="{{ '/logo-light.webp' | relative_url }}" width="576" height="505"
+           alt="WHOUP — Who's around. What's up.">
+    </picture>
+    <h1>Unde ieși acum, aproape de tine.</h1>
+    <p class="lead">
+      WHOUP e harta localurilor reale din Floreasca, Dorobanți și Aviatorilor:
+      unde stai pe terasă, ce e deschis până târziu, unde lucrezi la laptop și
+      unde poți veni cu câinele. Iar pe măsură ce se adună lumea, și cine iese
+      din casă acum, în apropierea ta.
+    </p>
+    <span class="store">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
+      În curând pe Google Play
+    </span>
+    <p class="where">Deocamdată, localurile de pe hartă sunt doar în București, în jurul zonei Floreasca – Dorobanți – Aviatorilor.</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card" style="--accent: var(--blue)">
+        <h2>Harta de localuri</h2>
+        <p>
+          Peste 300 de localuri din zonă, verificate de noi unul câte unul, din
+          surse recente, fiecare cu o notă scurtă despre ce găsești acolo.
+          Program, telefon și „Cum ajung”, direct din hartă. Se vede și fără cont.
+        </p>
+        <ul class="chips" aria-label="Filtre">
+          <li>Terasă</li>
+          <li>Bun pentru laptop</li>
+          <li>Deschis până târziu</li>
+          <li>Primește animale</li>
+        </ul>
+      </section>
+
+      <section class="card" style="--accent: var(--violet)">
+        <h2>Disponibil acum, nu pe veci</h2>
+        <p>
+          Alegi pentru ce ai chef — o bere, o cafea, o masă, business, sport,
+          plimbat câinele, ieșit cu copiii sau dating — și te pui pe hartă
+          pentru 1, 3 sau 6 ore. Disponibilitatea expiră singură, așa că harta
+          nu arată oameni care au plecat de mult.
+        </p>
+      </section>
+
+      <section class="card" style="--accent: var(--pink)">
+        <h2>„Ne vedem în 30 de minute”</h2>
+        <p>
+          Mesaje scurte între doi oameni, răspunsuri rapide și „Ne vedem aici”:
+          trimiți un local sau un punct de pe hartă, pe care îl vede doar
+          persoana cu care vorbești. Blocare și raportare din prima zi.
+        </p>
+      </section>
+
+      <section class="card" style="--accent: var(--orange)">
+        <h2>Poziția ta rămâne a ta</h2>
+        <p>
+          Ceilalți nu văd niciodată poziția ta exactă, doar o zonă de
+          aproximativ 250 de metri. Apari pe hartă doar cât ești disponibil, iar
+          când oprești disponibilitatea, poziția ta se șterge de pe server.
+        </p>
+      </section>
+    </div>
+
+    <p class="words" aria-hidden="true">PEOPLE · PLACES · PLANS · NOW</p>
+    <p class="tagline">Who’s around. What’s up.</p>
+  </main>
+
+  <footer>
+    <div class="cols">
+      <div>
+        <h2>Documente</h2>
+        <ul>
+          <li><a href="{{ '/confidentialitate' | relative_url }}">Politica de confidențialitate</a></li>
+          <li><a href="{{ '/termeni' | relative_url }}">Termeni și condiții</a></li>
+          <li><a href="{{ '/stergere-cont' | relative_url }}">Ștergerea contului</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:whoup.contact@gmail.com">whoup.contact@gmail.com</a></p>
+        <p>
+          EBEBE RETAIL CSA S.R.L. · CUI 42863783 · J40/9152/03.08.2020<br>
+          Str. Mărgeanului nr. 22, bl. M35, sc. 2, et. 7, ap. 69, camera 1,
+          Sector 5, București, România
+        </p>
+      </div>
+    </div>
+    <p class="small">
+      WHOUP este doar pentru persoane de cel puțin 18 ani. Site-ul acesta nu
+      folosește cookie-uri și nici instrumente de analiză a vizitatorilor.
+    </p>
+  </footer>
+</div>
+</body>
+</html>
