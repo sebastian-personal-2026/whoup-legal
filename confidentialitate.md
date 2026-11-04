@@ -5,7 +5,7 @@ permalink: /confidentialitate
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/confidentialitate.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 3 noiembrie 2026**
+**Ultima actualizare: 4 noiembrie 2026**
 
 Adresa publică a acestui document:
 <https://whoup.ro/confidentialitate>
@@ -57,7 +57,7 @@ adresa de mai sus.
 
 | Dată | De ce |
 |---|---|
-| Adresa de email | Ca să te poți conecta și ca să-ți putem trimite resetarea parolei |
+| Adresa de email | Ca să te poți conecta și ca să-ți trimitem emailurile legate de cont, cum ar fi confirmarea adresei sau resetarea parolei |
 | Parola | Nu o vedem niciodată: se stochează sub formă de amprentă criptografică (hash) |
 
 **Temei:** executarea contractului dintre tine și noi (art. 6 alin. 1 lit. b
@@ -223,6 +223,8 @@ Lucrăm cu următorii furnizori, strict pentru ca aplicația să funcționeze:
 | **Expo** | Actualizările aplicației și livrarea notificărilor | Tokenul de notificare și conținutul notificării |
 | **Apple (APNs)** și **Google (Firebase Cloud Messaging)** | Livrarea propriu-zisă a notificării pe telefon | Tokenul aparatului și conținutul notificării |
 | **MapTiler** | Fundalul hărții (străzi, clădiri) | Adresa IP a telefonului și zona de hartă la care te uiți. **Nu primește poziția ta și nu știe cine ești** |
+| **Resend** | Trimiterea emailurilor legate de cont (confirmarea adresei, resetarea parolei) | Adresa ta de email și textul emailului. Emailurile pleacă de pe servere din Uniunea Europeană (Irlanda). Nu urmărim dacă deschizi emailul sau pe ce apeși în el |
+| **Cloudflare** și **Google (Gmail)** | Primirea emailurilor pe care ni le trimiți: Cloudflare le redirecționează pe cele trimise la o adresă `@whoup.ro`, iar căsuța în care le citim este în Gmail | Adresa ta de email și ce ne scrii |
 | **Apple App Store** / **Google Play** | Distribuția aplicației și plata abonamentului | Datele de plată, pe care noi nu le vedem |
 
 Putem transmite date și autorităților, dacă ne obligă legea, sau dacă e necesar
