@@ -42,8 +42,9 @@ permalink: /
   poză schimbată cere și `alt`-ul ei schimbat, altfel descrierea minte.
   Rândul din subsol despre AI rămâne cât timp există vreo poză făcută cu AI.
   Ordinea pătrățelelor din perete nu e întâmplătoare:
-  cu `grid-auto-flow: dense`, ea umple exact 6×4 pe ecran lat și 4×6 pe
-  telefon, fără goluri. Un pătrat adăugat sau mutat se renumără.
+  cu `grid-auto-flow: dense`, ea umple exact 5×5 pe ecran lat (cu „What’s
+  up." lat cât două) și 3×8 pe telefon, fără goluri; pătratul mare `right`
+  stă în dreapta. Un pătrat adăugat sau mutat se renumără.
 -->
 <style>
   :root {
@@ -110,10 +111,22 @@ permalink: /
   .wall {
     max-width: 1180px; margin: 8px auto 0; padding: 0 16px;
     display: grid; gap: 8px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: dense;
   }
-  @media (min-width: 760px) { .wall { grid-template-columns: repeat(6, 1fr); gap: 10px; } }
+  /* Al doilea pătrat mare stă în dreapta: amândouă în stânga ar face din
+     perete o coloană de poze mari cu o dungă de pătrățele lângă. „-3 / -1"
+     înseamnă ultimele două coloane, oricâte ar fi pe rând. */
+  .tile.big.right { grid-column: -3 / -1; }
+  /* Pe calculator sunt 5 pe rând, iar 24 de căsuțe nu se împart la 5: un
+     pătrat lat (doar aici) face 25, adică 5×5 fără gol. Pe telefon e iar
+     pătrat, iar 24 se împart la 3. */
+  @media (min-width: 760px) {
+    .wall { grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .tile.wide { grid-column: span 2; aspect-ratio: auto; }
+    /* Tăiată 2:1 din mijloc, poza de yoga pierde capetele; cadrul urcă puțin. */
+    .tile.wide .back img { object-position: 50% 30%; }
+  }
   .tile {
     position: relative; margin: 0;
     aspect-ratio: 1 / 1;
@@ -130,7 +143,7 @@ permalink: /
   }
   .tile.big figcaption { left: 10px; bottom: 10px; font-size: 15px; padding: 5px 12px; }
   @media (min-width: 760px) { .tile figcaption { font-size: 13px; left: 8px; bottom: 8px; } }
-  /* Pe telefon, un pătrat mic are ~80 px: „Deschis până târziu" ar ocupa trei
+  /* Pe telefon, un pătrat mic are ~115 px: „Deschis până târziu" ar ocupa două
      rânduri peste poză. Se vede numele scurt, iar cititorul de ecran îl
      primește tot pe cel întreg. */
   .tile .short { display: none; }
@@ -189,11 +202,14 @@ permalink: /
     display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 6px; color: #fff;
     font-weight: 800; letter-spacing: 0.04em; line-height: 1.1;
-    font-size: clamp(12px, 2.6vw, 21px);
+    font-size: clamp(12px, 2.6vw, 24px);
   }
   .word.orange { color: var(--midnight); }
-  .word.phrase { letter-spacing: -0.01em; font-size: clamp(13px, 2.8vw, 22px); }
+  .word.phrase { letter-spacing: -0.01em; font-size: clamp(13px, 2.8vw, 25px); }
   .word.grad { background: linear-gradient(135deg, #2878FF, #7135F5 35%, #F52B9A 65%, #FFA126); }
+  /* Cu trei pe rând, pătratul e de două ori cât fontul de mai sus îl socotea;
+     cuvântul crește odată cu el. */
+  @media (max-width: 759px) { .word, .word.phrase { font-size: clamp(14px, 4.6vw, 22px); } }
 
   /* ---------- Secțiuni ---------- */
   section.block { padding: 56px 0 8px; }
@@ -314,13 +330,13 @@ permalink: /
   <figure class="tile flip" style="--c:#047857"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/sport.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/sport-poza.jpg' | relative_url }}" width="640" height="640" alt="Un grup de alergători pe aleea unui parc, într-o zi însorită" loading="lazy"></span></button><figcaption>Sport</figcaption></figure>
   <figure class="tile flip" style="--c:#0E7490"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/caine.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/caine-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni cu doi câini într-un parc, la apus" loading="lazy"></span></button><figcaption><span class="full">Plimbat câinele</span><span class="short" aria-hidden="true">Câine</span></figcaption></figure>
   <figure class="tile flip" style="--c:#F52B9A"><button class="flipper" type="button" aria-pressed="false"><span class="face word">PLANS</span><span class="face back"><img src="{{ '/foto/plans-poza.jpg' | relative_url }}" width="640" height="640" alt="Doi prieteni pe trotuar se uită la un telefon, unul arată spre capătul străzii" loading="lazy"></span></button></figure>
-  <figure class="tile flip big" style="--c:#BE185D"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/dating.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/dating-poza.jpg' | relative_url }}" width="800" height="800" alt="Un bărbat și o femeie își zâmbesc la un pahar de vin, într-un bar" loading="lazy"></span></button><figcaption>Dating</figcaption></figure>
+  <figure class="tile flip big right" style="--c:#BE185D"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/dating.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/dating-poza.jpg' | relative_url }}" width="800" height="800" alt="Un bărbat și o femeie își zâmbesc la un pahar de vin, într-un bar" loading="lazy"></span></button><figcaption>Dating</figcaption></figure>
   <figure class="tile flip" style="--c:#7C3AED"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/copii.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/copii-poza.jpg' | relative_url }}" width="640" height="640" alt="O mamă își dă fetița în leagăn, într-un parc, văzute din spate" loading="lazy"></span></button><figcaption><span class="full">Ieșit cu copiii</span><span class="short" aria-hidden="true">Copii</span></figcaption></figure>
   <figure class="tile flip" style="--c:#4C1D95"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/tarziu.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/tarziu-poza.jpg' | relative_url }}" width="640" height="640" alt="Prieteni râd la o masă pe o terasă, noaptea, sub ghirlande de becuri" loading="lazy"></span></button><figcaption><span class="full">Deschis până târziu</span><span class="short" aria-hidden="true">Târziu</span></figcaption></figure>
   <figure class="tile flip" style="--c:#0F766E"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/animale.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/animale-poza.jpg' | relative_url }}" width="640" height="640" alt="Două prietene la cafea pe o terasă, una ține un cățel în brațe" loading="lazy"></span></button><figcaption><span class="full">Primește animale</span><span class="short" aria-hidden="true">Animale</span></figcaption></figure>
   <figure class="tile flip" style="--c:#FFA126"><button class="flipper" type="button" aria-pressed="false"><span class="face word orange">NOW</span><span class="face back"><img src="{{ '/foto/now-poza.jpg' | relative_url }}" width="640" height="640" alt="Doi oameni fac exerciții împreună la aparatele dintr-un parc" loading="lazy"></span></button></figure>
   <figure class="tile flip" style="--c:#07172F"><button class="flipper" type="button" aria-pressed="false"><span class="face word phrase">Who’s around.</span><span class="face back"><img src="{{ '/foto/around-poza.jpg' | relative_url }}" width="640" height="640" alt="O femeie se joacă cu doi câini mici pe o alee din parc" loading="lazy"></span></button></figure>
-  <figure class="tile flip"><button class="flipper" type="button" aria-pressed="false"><span class="face word phrase grad">What’s up.</span><span class="face back"><img src="{{ '/foto/whatsup-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni fac yoga pe iarbă, într-un parc" loading="lazy"></span></button></figure>
+  <figure class="tile flip wide"><button class="flipper" type="button" aria-pressed="false"><span class="face word phrase grad">What’s up.</span><span class="face back"><img src="{{ '/foto/whatsup-poza.jpg' | relative_url }}" width="900" height="900" alt="Trei oameni fac yoga pe iarbă, într-un parc" loading="lazy"></span></button></figure>
 </div>
 <p class="flip-hint"><span class="hint-hover">Treci cu mouse-ul peste pătrățele ca să vezi pozele.</span><span class="hint-tap">Atinge un pătrățel ca să vezi poza.</span></p>
 
