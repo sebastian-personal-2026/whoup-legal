@@ -34,13 +34,14 @@ permalink: /
   adună lumea", nu „în curând” — partea cu oamenii funcționează deja, lipsesc
   doar oamenii, iar „în curând” ar spune „revino mai târziu”.
 
-  Pătratele din perete sunt deocamdată iconițele aplicației pe culorile ei
-  (4 noiembrie). Când vin pozele (originale în assets/site/, făcute pătrate de
-  640 px cu `npm run site:photos`), se schimbă două lucruri aici, nu doar
-  fișierele: textul `alt` al fiecărei poze (din tabelul din
-  assets/site/README.md) și rândul din subsol care spune că pozele sunt
-  create cu AI. Cât sunt iconițe, `alt` rămâne gol: eticheta de sub pătrat
-  spune deja ce e, iar o descriere de fotografie peste o iconiță ar minți. Ordinea pătrățelelor din perete nu e întâmplătoare:
+  Pătrățelele cu poze sunt cărți cu două fețe (5 noiembrie): pe față
+  iconița aplicației pe culoarea intenției (`foto/<nume>.jpg`, desenate pe
+  4 noiembrie), pe spate poza făcută cu AI (`foto/<nume>-poza.jpg`, din
+  originalele din assets/site/, prin `npm run site:photos`). Iconița are
+  `alt` gol, pentru că eticheta spune deja ce e; poza are descrierea ei. O
+  poză schimbată cere și `alt`-ul ei schimbat, altfel descrierea minte.
+  Rândul din subsol despre AI rămâne cât timp există vreo poză făcută cu AI.
+  Ordinea pătrățelelor din perete nu e întâmplătoare:
   cu `grid-auto-flow: dense`, ea umple exact 6×4 pe ecran lat și 4×6 pe
   telefon, fără goluri. Un pătrat adăugat sau mutat se renumără.
 -->
@@ -140,6 +141,50 @@ permalink: /
     }
     .tile:not(.big) .short { display: inline; }
   }
+  /* Cărțile care se întorc: pe față iconița, pe spate poza. Pe calculator se
+     întorc la trecerea mouse-ului, pe telefon la atingere (scriptul de la
+     final); cine are „reducere animații" pornită primește o trecere lină, fără
+     rotire. Eticheta stă în afara cărții, deci se citește pe ambele fețe. */
+  .tile.flip { background: none; overflow: visible; perspective: 900px; }
+  .tile.flip:hover, .tile.flip.on { z-index: 1; }
+  .flipper {
+    all: unset;
+    display: block; position: relative; width: 100%; height: 100%;
+    border-radius: inherit; cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .face {
+    position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+    background: var(--c);
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  }
+  .face.back { transform: rotateY(180deg); }
+  .tile.flip.on .flipper { transform: rotateY(180deg); }
+  .flipper:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+  .tile.flip figcaption { z-index: 2; pointer-events: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .tile.flip:hover .flipper { transform: rotateY(180deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flipper, .tile.flip:hover .flipper, .tile.flip.on .flipper { transform: none; transition: none; }
+    .face.back { transform: none; opacity: 0; transition: opacity 0.25s; }
+    .tile.flip.on .face.back { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) and (hover: hover) and (pointer: fine) {
+    .tile.flip:hover .face.back { opacity: 1; }
+  }
+  .flip-hint {
+    max-width: 1180px; margin: 12px auto 0; padding: 0 16px;
+    text-align: center; font-size: 14px; color: var(--muted);
+  }
+  .hint-hover { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .hint-hover { display: inline; }
+    .hint-tap { display: none; }
+  }
+
   .word {
     display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 6px; color: #fff;
@@ -258,25 +303,26 @@ permalink: /
 </div>
 
 <div class="wall" role="group" aria-label="Pentru ce poți ieși cu WHOUP">
-  <figure class="tile big" style="--c:#B45309"><img src="{{ '/foto/bere.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O bere</figcaption></figure>
-  <figure class="tile" style="--c:#78350F"><img src="{{ '/foto/cafea.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O cafea</figcaption></figure>
-  <div class="tile word" style="--c:#2878FF">PEOPLE</div>
-  <figure class="tile" style="--c:#1D4ED8"><img src="{{ '/foto/business.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>Business</figcaption></figure>
-  <figure class="tile" style="--c:#DC2626"><img src="{{ '/foto/masa.jpg' | relative_url }}" width="640" height="640" alt=""><figcaption>O masă</figcaption></figure>
-  <figure class="tile" style="--c:#D97706"><img src="{{ '/foto/terasa.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Terasă</figcaption></figure>
-  <figure class="tile" style="--c:#334155"><img src="{{ '/foto/laptop.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Bun pentru laptop</span><span class="short" aria-hidden="true">Laptop</span></figcaption></figure>
+  <figure class="tile flip big" style="--c:#B45309"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/bere.jpg' | relative_url }}" width="640" height="640" alt=""></span><span class="face back"><img src="{{ '/foto/bere-poza.jpg' | relative_url }}" width="800" height="800" alt="Patru prieteni ciocnesc halbe de bere la o masă, într-un bar" loading="lazy"></span></button><figcaption>O bere</figcaption></figure>
+  <figure class="tile flip" style="--c:#78350F"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/cafea.jpg' | relative_url }}" width="640" height="640" alt=""></span><span class="face back"><img src="{{ '/foto/cafea-poza.jpg' | relative_url }}" width="640" height="640" alt="Doi oameni râd la o cafea, la o măsuță de cafenea" loading="lazy"></span></button><figcaption>O cafea</figcaption></figure>
+  <figure class="tile flip" style="--c:#2878FF"><button class="flipper" type="button" aria-pressed="false"><span class="face word">PEOPLE</span><span class="face back"><img src="{{ '/foto/people-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni cu bicicletele stau la o vorbă pe o alee de lângă apă" loading="lazy"></span></button></figure>
+  <figure class="tile flip" style="--c:#1D4ED8"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/business.jpg' | relative_url }}" width="640" height="640" alt=""></span><span class="face back"><img src="{{ '/foto/business-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni discută la o cafenea, cu un laptop deschis pe masă" loading="lazy"></span></button><figcaption>Business</figcaption></figure>
+  <figure class="tile flip" style="--c:#DC2626"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/masa.jpg' | relative_url }}" width="640" height="640" alt=""></span><span class="face back"><img src="{{ '/foto/masa-poza.jpg' | relative_url }}" width="640" height="640" alt="Patru prieteni la cină, cu farfuriile pe masă, într-un restaurant" loading="lazy"></span></button><figcaption>O masă</figcaption></figure>
+  <figure class="tile flip" style="--c:#D97706"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/terasa.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/terasa-poza.jpg' | relative_url }}" width="640" height="640" alt="Oameni la mese pe o terasă însorită, sub umbrele" loading="lazy"></span></button><figcaption>Terasă</figcaption></figure>
+  <figure class="tile flip" style="--c:#334155"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/laptop.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/laptop-poza.jpg' | relative_url }}" width="640" height="640" alt="O femeie lucrează la laptop într-o cafenea, lângă o priză" loading="lazy"></span></button><figcaption><span class="full">Bun pentru laptop</span><span class="short" aria-hidden="true">Laptop</span></figcaption></figure>
   <div class="tile word" style="--c:#6C35F5">PLACES</div>
-  <figure class="tile" style="--c:#047857"><img src="{{ '/foto/sport.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Sport</figcaption></figure>
-  <figure class="tile" style="--c:#0E7490"><img src="{{ '/foto/caine.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Plimbat câinele</span><span class="short" aria-hidden="true">Câine</span></figcaption></figure>
+  <figure class="tile flip" style="--c:#047857"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/sport.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/sport-poza.jpg' | relative_url }}" width="640" height="640" alt="Un grup de alergători pe aleea unui parc, într-o zi însorită" loading="lazy"></span></button><figcaption>Sport</figcaption></figure>
+  <figure class="tile flip" style="--c:#0E7490"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/caine.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/caine-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni cu doi câini într-un parc, la apus" loading="lazy"></span></button><figcaption><span class="full">Plimbat câinele</span><span class="short" aria-hidden="true">Câine</span></figcaption></figure>
   <div class="tile word" style="--c:#F52B9A">PLANS</div>
-  <figure class="tile big" style="--c:#BE185D"><img src="{{ '/foto/dating.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption>Dating</figcaption></figure>
-  <figure class="tile" style="--c:#7C3AED"><img src="{{ '/foto/copii.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Ieșit cu copiii</span><span class="short" aria-hidden="true">Copii</span></figcaption></figure>
-  <figure class="tile" style="--c:#4C1D95"><img src="{{ '/foto/tarziu.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Deschis până târziu</span><span class="short" aria-hidden="true">Târziu</span></figcaption></figure>
-  <figure class="tile" style="--c:#0F766E"><img src="{{ '/foto/animale.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"><figcaption><span class="full">Primește animale</span><span class="short" aria-hidden="true">Animale</span></figcaption></figure>
-  <div class="tile word orange" style="--c:#FFA126">NOW</div>
-  <div class="tile word phrase" style="--c:#07172F">Who’s around.</div>
-  <div class="tile word phrase grad">What’s up.</div>
+  <figure class="tile flip big" style="--c:#BE185D"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/dating.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/dating-poza.jpg' | relative_url }}" width="800" height="800" alt="Un bărbat și o femeie își zâmbesc la un pahar de vin, într-un bar" loading="lazy"></span></button><figcaption>Dating</figcaption></figure>
+  <figure class="tile flip" style="--c:#7C3AED"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/copii.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/copii-poza.jpg' | relative_url }}" width="640" height="640" alt="Un părinte plimbă căruciorul cu bebelușul pe o alee înflorită" loading="lazy"></span></button><figcaption><span class="full">Ieșit cu copiii</span><span class="short" aria-hidden="true">Copii</span></figcaption></figure>
+  <figure class="tile flip" style="--c:#4C1D95"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/tarziu.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/tarziu-poza.jpg' | relative_url }}" width="640" height="640" alt="Un grup de prieteni se uită împreună la un telefon, seara, pe o terasă" loading="lazy"></span></button><figcaption><span class="full">Deschis până târziu</span><span class="short" aria-hidden="true">Târziu</span></figcaption></figure>
+  <figure class="tile flip" style="--c:#0F766E"><button class="flipper" type="button" aria-pressed="false"><span class="face"><img src="{{ '/foto/animale.jpg' | relative_url }}" width="640" height="640" alt="" loading="lazy"></span><span class="face back"><img src="{{ '/foto/animale-poza.jpg' | relative_url }}" width="640" height="640" alt="Două prietene la cafea pe o terasă, una ține un cățel în brațe" loading="lazy"></span></button><figcaption><span class="full">Primește animale</span><span class="short" aria-hidden="true">Animale</span></figcaption></figure>
+  <figure class="tile flip" style="--c:#FFA126"><button class="flipper" type="button" aria-pressed="false"><span class="face word orange">NOW</span><span class="face back"><img src="{{ '/foto/now-poza.jpg' | relative_url }}" width="640" height="640" alt="Doi oameni fac exerciții împreună la aparatele dintr-un parc" loading="lazy"></span></button></figure>
+  <figure class="tile flip" style="--c:#07172F"><button class="flipper" type="button" aria-pressed="false"><span class="face word phrase">Who’s around.</span><span class="face back"><img src="{{ '/foto/around-poza.jpg' | relative_url }}" width="640" height="640" alt="O femeie se joacă cu doi câini mici pe o alee din parc" loading="lazy"></span></button></figure>
+  <figure class="tile flip"><button class="flipper" type="button" aria-pressed="false"><span class="face word phrase grad">What’s up.</span><span class="face back"><img src="{{ '/foto/whatsup-poza.jpg' | relative_url }}" width="640" height="640" alt="Trei oameni fac yoga pe iarbă, într-un parc" loading="lazy"></span></button></figure>
 </div>
+<p class="flip-hint"><span class="hint-hover">Treci cu mouse-ul peste pătrățele ca să vezi pozele.</span><span class="hint-tap">Atinge un pătrățel ca să vezi poza.</span></p>
 
 <div class="wrap">
   <main>
@@ -422,7 +468,21 @@ permalink: /
       WHOUP este doar pentru persoane de cel puțin 18 ani. Site-ul nu folosește
       cookie-uri și nici instrumente de analiză a vizitatorilor.
     </p>
+    <p class="small">
+      Fotografiile de pe pagină sunt ilustrative, create cu AI: oamenii din ele
+      nu sunt utilizatori WHOUP.
+    </p>
   </footer>
 </div>
+<script>
+  // Pe telefon nu există „treci cu mouse-ul": prima atingere întoarce
+  // cartea, a doua o întoarce înapoi. Pe calculator, clicul o lasă întoarsă.
+  document.querySelectorAll('.flipper').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var on = button.parentNode.classList.toggle('on');
+      button.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  });
+</script>
 </body>
 </html>
