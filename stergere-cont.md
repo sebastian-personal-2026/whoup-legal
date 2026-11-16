@@ -5,7 +5,7 @@ permalink: /stergere-cont
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/stergere-cont.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 3 noiembrie 2026**
+**Ultima actualizare: 16 noiembrie 2026**
 
 Adresa publică a acestui document:
 <https://whoup.ro/stergere-cont>
@@ -77,9 +77,8 @@ Definitiv, fără posibilitate de recuperare:
 - **data nașterii**;
 - **disponibilitățile și poziția ta**;
 - **postările**;
-- **conversațiile** la care ai participat, cu toate mesajele din ele,
-  inclusiv punctele de întâlnire trimise. O conversație dispare și din lista
-  celeilalte persoane;
+- **conversațiile** în care n-a scris nimeni nimic și cele în care celălalt
+  și-a șters deja contul, cu toate mesajele din ele;
 - **blocările** — cele făcute de tine și cele făcute de alții față de tine;
 - **tokenurile de notificare** ale telefoanelor tale și setările de
   notificări.
@@ -88,10 +87,13 @@ Definitiv, fără posibilitate de recuperare:
 
 ## 4. Ce rămâne, și cât timp
 
-Trei lucruri rămân după ștergere. Niciunul nu mai e legat de contul tău.
+Câteva lucruri rămân după ștergere. Niciunul nu mai poartă numele tău și nu
+mai e legat de un cont.
 
 | Ce rămâne | De ce | Cât timp |
 |---|---|---|
+| **Mesajele tale din conversațiile celorlalți**, inclusiv punctele de întâlnire trimise. Apar ca de la „Cont șters", fără numele și fără poza ta, și nu se mai poate scrie în ele | Ce ți-a scris cineva rămâne la tine și după ce pleacă. Altfel, cine hărțuiește pe cineva și-ar putea șterge dovada ștergându-și contul | Până când își șterge contul și cealaltă persoană; atunci conversația se șterge cu totul |
+| **Raportările despre tine**, dacă ai fost raportat, cu adresa de email și numele afișat pe care le aveai la ștergere | Ca un om hărțuit să poată merge la poliție și după ce celălalt a plecat din aplicație | Un an de la ștergerea contului, apoi se șterg automat |
 | **Raportările pe care le-ai trimis** despre alți utilizatori, cu motivul ales și cu detaliile scrise de tine, dacă ai scris | Ca informația despre persoana raportată să nu dispară pentru că a plecat cel care a semnalat-o | Nu au un termen de ștergere automată. Legătura cu tine se șterge odată cu contul |
 | **Istoricul fără nume al disponibilităților**: pentru ce intenție, când a pornit și când s-a oprit | Ca să numărăm câți oameni sunt pe hartă seara | Nu are termen: nu conține contul, nota sau poziția ta, deci nu se poate lega de tine |
 | **Erorile tehnice** trimise de telefonul tău | Ca să reparăm defectele aplicației | Fără identificatorul contului; se șterg automat la cel mult 90 de zile de la apariția erorii |
@@ -111,8 +113,8 @@ Nu trebuie să-ți ștergi contul ca să scapi de unele date:
 **Mesajele nu se pot șterge unul câte unul**, nici de tine, nici de
 destinatar — e o măsură de siguranță, explicată în politica de
 confidențialitate. „Șterge conversația" o scoate doar din lista ta: mesajele
-rămân stocate, ca să poată fi citite în cazul unei raportări, până când unul
-dintre voi își șterge contul.
+rămân stocate, ca să poată fi citite în cazul unei raportări, până când vă
+ștergeți contul amândoi.
 
 ---
 

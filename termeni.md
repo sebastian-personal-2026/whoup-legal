@@ -5,7 +5,7 @@ permalink: /termeni
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/termeni.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 3 noiembrie 2026**
+**Ultima actualizare: 16 noiembrie 2026**
 
 Adresa publică a acestui document:
 <https://whoup.ro/termeni>
@@ -81,8 +81,9 @@ aplicația să funcționeze.
 Răspunzi pentru ce publici. Nu publica ce nu-ți aparține.
 
 **Ce nu se poate șterge, și de ce:** mesajele trimise și postările publicate nu
-pot fi modificate. Postările pot fi șterse; mesajele, nu. Motivul este
-siguranța celorlalți: dacă mesajele s-ar putea șterge, cine hărțuiește pe
+pot fi modificate. Postările pot fi șterse; mesajele, nu — nici prin
+ștergerea contului: rămân la cel care le-a primit, fără numele tău. Motivul
+este siguranța celorlalți: dacă mesajele s-ar putea șterge, cine hărțuiește pe
 cineva ar putea distruge dovada înainte ca noi să ne uităm peste o raportare.
 
 ## 7. Blocare, raportare, moderare

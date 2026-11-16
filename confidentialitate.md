@@ -5,7 +5,7 @@ permalink: /confidentialitate
 
 <!-- GENERAT de scripts/build-legal-site.mjs. Nu se editează aici:
      sursa este docs/confidentialitate.md, iar modificările de aici se pierd. -->
-**Ultima actualizare: 4 noiembrie 2026**
+**Ultima actualizare: 16 noiembrie 2026**
 
 Adresa publică a acestui document:
 <https://whoup.ro/confidentialitate>
@@ -144,6 +144,11 @@ Două lucruri pe care le spunem pe față:
 - **„Șterge conversația" o scoate din lista ta**, nu din a celuilalt și nu din
   baza de date. După ștergere nu mai vezi mesajele de dinainte; ele rămân
   stocate și pot fi citite de noi în cazul unei raportări.
+- **Mesajele tale rămân la celălalt și după ce îți ștergi contul**, fără
+  numele și fără poza ta: apar ca de la „Cont șters", iar în conversație nu
+  se mai poate scrie. Din același motiv: ștergerea contului n-are voie să fie
+  o cale de a distruge dovada. Conversația se șterge cu totul când își șterge
+  contul și celălalt.
 
 **Temei:** executarea contractului, plus interesul nostru legitim de a menține
 un mediu sigur (art. 6 alin. 1 lit. f).
@@ -170,6 +175,12 @@ raportarea într-o armă.
 O raportare **supraviețuiește ștergerii contului celui care a trimis-o**, dar
 fără legătura cu el: informația despre persoana raportată nu dispare pentru că
 a plecat cel care a semnalat-o.
+
+O raportare **despre cineva care își șterge contul se păstrează un an** de la
+ștergere, împreună cu adresa de email și numele afișat pe care le avea atunci.
+Fără ele, raportarea n-ar mai spune despre cine e vorba, iar un om hărțuit
+trebuie să poată merge la poliție și după ce celălalt a plecat din aplicație.
+După un an se șterge automat.
 
 **Temei:** interesul legitim de a proteja utilizatorii și obligațiile care ne
 revin ca furnizor de serviciu (art. 6 alin. 1 lit. f și c).
@@ -244,10 +255,10 @@ aprobate de Comisia Europeană.
 | Poziția ta | Doar cât ai o disponibilitate activă. Se șterge când o oprești, iar dacă expiră singură, în cel mult cinci minute |
 | Disponibilitățile | Expiră la termenul ales și nu mai apar nicăieri; rândul se șterge odată cu contul |
 | Istoricul fără nume al disponibilităților | Nu conține nimic despre tine, deci nu se leagă de cont |
-| Mesajele și conversațiile | Cât timp există contul tău și al celuilalt participant. Când unul dintre voi își șterge contul, conversația dintre voi se șterge cu totul |
+| Mesajele și conversațiile | Cât timp există cel puțin unul dintre cele două conturi. Dacă îți ștergi contul, mesajele tale rămân la celălalt, sub „Cont șters"; conversația se șterge cu totul când își șterge contul și el |
 | Postările | Expiră la termenul ales; se șterg odată cu contul |
 | Blocările | Cât timp ai cont, sau până le anulezi tu |
-| Raportările | Se păstrează și după ștergerea contului celui care a raportat, fără legătura cu el |
+| Raportările | Se păstrează și după ștergerea contului celui care a raportat, fără legătura cu el. Cele despre un cont șters: un an de la ștergere, apoi se șterg automat |
 | Erorile tehnice | Cel mult 90 de zile |
 
 ---
@@ -287,14 +298,18 @@ contul definitiv`. Este definitivă și nu poate fi anulată.
 contului]({{ '/stergere-cont' | relative_url }}).
 
 Se șterg: contul, profilul, data nașterii, poza de profil, disponibilitățile,
-poziția, postările, blocările, tokenurile de notificare și **conversațiile la
-care ai participat, întregi** — cu mesajele ambelor părți. O conversație
-dispare deci și din lista celeilalte persoane.
+poziția, postările, blocările, tokenurile de notificare, conversațiile în care
+n-a scris nimeni nimic și cele în care celălalt și-a șters deja contul.
 
-Rămân, fără legătura cu tine: istoricul fără nume al disponibilităților
-(secțiunea 2.4), raportările pe care le-ai trimis despre alți
-utilizatori (ca informația despre cel raportat să nu dispară) și erorile
-tehnice trimise de telefonul tău, care se șterg oricum la cel mult 90 de zile.
+Rămân, fără numele tău: **mesajele tale din conversațiile celorlalți**, care
+apar ca de la „Cont șters" și se șterg când își șterge contul și celălalt
+(secțiunea 2.6); istoricul fără nume al disponibilităților (secțiunea 2.4);
+raportările pe care le-ai trimis despre alți utilizatori (ca informația despre
+cel raportat să nu dispară); și erorile tehnice trimise de telefonul tău, care
+se șterg oricum la cel mult 90 de zile.
+
+Dacă **ai fost raportat**, raportarea rămâne un an de la ștergerea contului,
+cu adresa de email și numele de atunci (secțiunea 2.8).
 
 ---
 
