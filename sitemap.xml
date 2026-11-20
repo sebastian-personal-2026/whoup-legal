@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GENERAT de scripts/build-seo-pages.mjs (npm run site:pages). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://whoup.ro/</loc></url>
+  <url><loc>https://whoup.ro/lucru-la-laptop-floreasca/</loc></url>
+  <url><loc>https://whoup.ro/confidentialitate</loc></url>
+  <url><loc>https://whoup.ro/termeni</loc></url>
+  <url><loc>https://whoup.ro/stergere-cont</loc></url>
+  <url><loc>https://whoup.ro/siguranta-copiilor</loc></url>
+</urlset>

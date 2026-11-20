@@ -1,0 +1,5 @@
+# GENERAT de scripts/build-seo-pages.mjs (npm run site:pages).
+User-agent: *
+Allow: /
+
+Sitemap: https://whoup.ro/sitemap.xml
