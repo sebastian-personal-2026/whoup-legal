@@ -105,6 +105,7 @@ permalink: /
     font-weight: 600; font-size: 16px;
     text-decoration: none; min-height: 48px; box-sizing: border-box;
   }
+  .stores { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
   .store:hover { opacity: .88; }
   .store:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
   .store svg { width: 20px; height: 20px; flex: none; }
@@ -276,6 +277,9 @@ permalink: /
 
   .next { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
   @media (min-width: 760px) { .next { grid-template-columns: 1fr 1fr; } }
+  /* Un singur rând (iPhone a ieșit de pe listă pe 25 noiembrie) ia toată
+     lățimea, nu jumătate cu un gol alături. */
+  .next li:only-child { grid-column: 1 / -1; }
   .next li {
     border: 1px dashed var(--border); border-radius: 18px; padding: 18px 20px;
     color: var(--muted);
@@ -314,11 +318,20 @@ permalink: /
       din casă, te pui și tu pe ea și vezi cine mai iese acum, aproape: pentru
       o bere, o cafea, o masă, sport sau o plimbare cu câinele.
     </p>
-    <a class="store" href="https://play.google.com/store/apps/details?id=com.whoup.app">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
-      Descarcă din Google Play
-    </a>
-    <p class="where">Pornim pe Android, în București, în jurul zonei Floreasca – Dorobanți – Aviatorilor.</p>
+    <!-- Iconița de la App Store e un telefon, nu mărul: sigla Apple se
+         folosește doar în insigna oficială, iar butoanele noastre sunt
+         desenate de noi, ca cel de Google Play. -->
+    <div class="stores">
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.whoup.app">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
+        Descarcă din Google Play
+      </a>
+      <a class="store" href="https://apps.apple.com/app/whoup/id6838723668">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 1.5h8A2.5 2.5 0 0 1 18.5 4v16a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 20V4A2.5 2.5 0 0 1 8 1.5Zm0 2a.5.5 0 0 0-.5.5v16c0 .28.22.5.5.5h8a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5h-1.4l-.35.7a.5.5 0 0 1-.45.3h-2.6a.5.5 0 0 1-.45-.3l-.35-.7H8Z"/></svg>
+        Descarcă din App Store
+      </a>
+    </div>
+    <p class="where">Pe Android și iPhone. Localurile sunt în București, în jurul zonei Floreasca – Dorobanți – Aviatorilor.</p>
   </header>
 </div>
 
@@ -454,9 +467,7 @@ permalink: /
       <p class="kicker">Ce pregătim</p>
       <h2 class="title" id="urmeaza">Ce urmează în WHOUP.</h2>
       <ul class="next">
-        <li><strong>Date la zi de la localuri</strong>Le scriem localurilor din zonă să ne confirme programul și ce oferă, ca nota din hartă să rămână adevărată.</li>
-        <li><strong>WHOUP pe iPhone</strong>Pornim pe Android; versiunea de iPhone vine după.</li>
-      </ul>
+        <li><strong>Date la zi de la localuri</strong>Le scriem localurilor din zonă să ne confirme programul și ce oferă, ca nota din hartă să rămână adevărată.</li>      </ul>
     </section>
 
     <p class="words" aria-hidden="true">PEOPLE · PLACES · PLANS · NOW</p>

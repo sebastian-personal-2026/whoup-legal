@@ -130,6 +130,7 @@
     font-weight: 600; font-size: 16px;
     text-decoration: none; min-height: 48px;
   }
+  .stores { display: flex; flex-wrap: wrap; gap: 10px; }
   .store:hover { opacity: .88; }
   .store svg { width: 20px; height: 20px; flex: none; }
   .cta .where { margin: 14px 0 0; font-size: 15px; }
@@ -876,11 +877,17 @@
         sunt peste 300 de localuri din zonă, fiecare cu nota lui,
         iar harta se vede și fără cont.
       </p>
-      <a class="store" href="https://play.google.com/store/apps/details?id=com.whoup.app">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
-        Descarcă din Google Play
-      </a>
-      <p class="where">Deocamdată WHOUP e doar pe Android. Varianta de iPhone vine după.</p>
+      <div class="stores">
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.whoup.app">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2a.7.7 0 0 0 0-1.2l-16-9.2A.6.6 0 0 0 4 2.8Z"/></svg>
+          Descarcă din Google Play
+        </a>
+        <a class="store" href="https://apps.apple.com/app/whoup/id6838723668">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 1.5h8A2.5 2.5 0 0 1 18.5 4v16a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 20V4A2.5 2.5 0 0 1 8 1.5Zm0 2a.5.5 0 0 0-.5.5v16c0 .28.22.5.5.5h8a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5h-1.4l-.35.7a.5.5 0 0 1-.45.3h-2.6a.5.5 0 0 1-.45-.3l-.35-.7H8Z"/></svg>
+          Descarcă din App Store
+        </a>
+      </div>
+      <p class="where">WHOUP e pe Android și pe iPhone.</p>
     </section>
   </main>
 
